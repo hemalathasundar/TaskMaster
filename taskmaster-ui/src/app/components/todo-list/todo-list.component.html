@@ -1,0 +1,76 @@
+<div class="todo-list-container">
+  <!-- Page Header -->
+  <div class="bg-primary border-bottom border-primary py-4 mb-4">
+    <div class="container">
+      <h1 class="display-5 fw-bold text-white mb-2">Task Management</h1>
+      <p class="text-white-50 mb-0">Manage your tasks efficiently with our professional todo list application</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Action Bar -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h2 class="h4 fw-semibold text-dark mb-1">Todo List</h2>
+            <span class="text-muted small">{{ todos.length }} items</span>
+          </div>
+          <div>
+            <button class="btn btn-primary" (click)="openAddModal()">
+              Add New Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid Container -->
+    <div class="mb-4">
+      <div class="card">
+        <!-- Loading State -->
+        <div *ngIf="loading" class="d-flex flex-column align-items-center justify-content-center py-5 text-muted">
+          <div class="spinner-border text-primary mb-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mb-0">Loading todos...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!loading && todos.length === 0" class="d-flex flex-column align-items-center justify-content-center py-5 text-center text-muted">
+          <div class="mb-4">
+            <i class="fas fa-clipboard-list fa-3x text-light"></i>
+          </div>
+          <h3 class="h5 fw-semibold text-dark mb-2">No tasks yet</h3>
+          <p class="mb-4">Get started by adding your first task</p>
+          <button class="btn btn-primary" (click)="openAddModal()">
+            <i class="fas fa-plus me-2"></i>
+            Add Your First Task
+          </button>
+        </div>
+
+        <!-- AG-Grid (only show when there are todos) -->
+        <div *ngIf="!loading && todos.length > 0" class="grid-wrapper">
+          <ag-grid-angular
+            class="ag-theme-alpine"
+            [rowData]="todos"
+            [columnDefs]="columnDefs"
+            [defaultColDef]="defaultColDef"
+            [animateRows]="true"
+            [rowSelection]="'single'"
+            (gridReady)="onGridReady($event)"
+            style="width: 100%; height: 500px;">
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Todo Modal -->
+  <app-add-todo-modal
+    *ngIf="showAddModal"
+    (todoAdded)="onTodoAdded()"
+    (modalClosed)="closeAddModal()">
+  </app-add-todo-modal>
+</div> 

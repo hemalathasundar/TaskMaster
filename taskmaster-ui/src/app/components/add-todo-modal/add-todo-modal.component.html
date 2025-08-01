@@ -1,0 +1,98 @@
+<!-- Bootstrap Modal -->
+<div class="modal fade show" 
+     [class.d-block]="true" 
+     tabindex="-1" 
+     role="dialog" 
+     aria-labelledby="addTodoModalLabel" 
+     aria-hidden="true"
+     (click)="onCancel()">
+  
+  <div class="modal-dialog modal-dialog-centered" (click)="$event.stopPropagation()">
+    <div class="modal-content">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTodoModalLabel">
+          Add New Task
+        </h5>
+        <button type="button" 
+                class="btn-close" 
+                (click)="onCancel()" 
+                aria-label="Close"></button>
+      </div>
+      
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #todoForm="ngForm">
+          
+          <!-- Title Field -->
+          <div class="mb-3">
+            <label for="title" class="form-label">
+              Title *
+            </label>
+            <input 
+              type="text" 
+              class="form-control" 
+              id="title"
+              name="title"
+              [(ngModel)]="todo.title" 
+              required
+              maxlength="200"
+              placeholder="Enter task title..."
+              [class.is-invalid]="todoForm.submitted && !todo.title">
+            <div class="invalid-feedback" *ngIf="todoForm.submitted && !todo.title">
+              Title is required
+            </div>
+          </div>
+          
+          <!-- Description Field -->
+          <div class="mb-3">
+            <label for="description" class="form-label">
+              Description
+            </label>
+            <textarea 
+              class="form-control" 
+              id="description"
+              name="description"
+              [(ngModel)]="todo.description" 
+              rows="4"
+              maxlength="1000"
+              placeholder="Enter task description (optional)..."></textarea>
+            <div class="form-text">
+              <i class="fas fa-info-circle me-1"></i>
+              Optional: Add details about your task
+            </div>
+          </div>
+          
+          <!-- Error Message -->
+          <div class="alert alert-danger" *ngIf="error">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            {{ error }}
+          </div>
+        </form>
+      </div>
+      
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" 
+                class="btn btn-secondary" 
+                (click)="onCancel()">
+          <i class="fas fa-times me-2"></i>
+          Cancel
+        </button>
+        <button type="button" 
+                class="btn btn-primary" 
+                (click)="onSubmit()" 
+                [disabled]="loading">
+          <i class="fas fa-save me-2" *ngIf="!loading"></i>
+          <span class="spinner-border spinner-border-sm me-2" *ngIf="loading" role="status"></span>
+          {{ loading ? 'Creating...' : 'Create Task' }}
+        </button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop fade show" (click)="onCancel()"></div> 
