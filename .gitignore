@@ -1,0 +1,88 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.dll
+*.exe
+*.pdb
+*.log
+*.tmp
+
+# Angular
+node_modules/
+dist/
+.angular/
+*.tsbuildinfo
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ASP.NET Core
+project.lock.json
+artifacts/
+
+# Visual Studio build files
+*.ilk
+*.obj
+*.pch
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+
+# Visual Studio cache
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+
+# Publish files
+*.pubxml
+*.publishproj
+*.azurePubxml
+
+# SQL Server
+*.mdf
+*.ldf
+*.ndf
+
+# Others
+ClientBin/
+~$*
+*~
+*.pfx
+*.publishsettings 
